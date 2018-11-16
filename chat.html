@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>手机聊天界面</title>
+    <style>
+    body{}
+    *{margin:0; padding:0}
+    li{list-style: none;}
+    .container{ width:310px; height:600px; margin:20px auto 0; background: url('images/iphone.jpg'); position:
+    relative;}
+    #name{width:23px; height:23px; border:1px solid darkgrey; border-radius: 8px; padding:3px; cursor:pointer;}
+    .main{bottom:64px; left:22px; border-top:1px solid darkgrey; position:absolute;padding:6px 4px 4px 7px;width: 258px;}
+    #import{border-radius: 4px; height:18px; line-height:18px; border: 1px solid #b8b8b8; outline:0;padding:5px; bottom:5px; position:relative; bottom:11px;width: 160px;}
+    #enter{font: 18px 'Microsoft YaHei';bottom: 8px;  position: relative; cursor:pointer;}
+    .content{width: 255px;height: 389px;top: 84px; position: relative;overflow: auto;
+        padding: 0 0 0 28px;}
+    .content li{ line-height:28px;margin-bottom: 15px;overflow: hidden;position: relative;}
+    #inHtml img{width:25px; height:25px;position: relative;}
+    .th{text-align: right;}
+    .th img{float:right; margin-left:15px;}
+    .ds img{    width: 25px;height: 25px;position: relative;float: left;margin-right: 15px;}
+    .th p{background: forestgreen; text-align: left;padding: 3px 5px;border-radius: 4px;color: white; float:right;max-width: 182px;font:14px 'Microsoft YaHei'; }
+    .ds p{background: dimgrey;float: left;text-align: left;padding: 3px 4px;border-radius: 4px;color: white;
+        left: 32px;max-width: 190px; font:14px 'Microsoft YaHei';}
+    .ds{ text-align: left;}
+    .sent1{width:0; height:0; border:solid 8px; border-color: white white white forestgreen; position: absolute;right: 24px;top: 4px;}
+    .sent2{width:0; height:0; border:solid 8px; border-color: white dimgrey white white ; position: absolute;left: 24px;top: 4px;}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <ul id="inHtml"></ul>
+    </div>
+    <div class="main">
+        <img id='name' src="images/tuhaoo.png">
+        <input id='import' type="text">
+        <span id="enter">发送</span>
+    </div>
+</div>
+<script>
+    window.onload = function(){
+        //给两个图片定义为一个数组
+        var arr = ['images/tuhaoo.png','images/diaoshi.png'];
+        //得到名称的图标
+        var oName = $('name');
+        //得到输入内容
+        var oGet = $('import');
+        //显示输入内容
+        var oWrite = $('inHtml');
+        //默认输入框显示光标
+        oGet.focus();
+        //默认显示土豪
+        var onOff = true;
+        oName.onclick = function () {
+            if(onOff){
+                oName.src = arr[1];
+                onOff = false;
+                oGet.focus();
+            } else {
+                oName.src = arr[0];
+                onOff = true;
+                oGet.focus();
+            }
+        }
+        //发送事件
+        var oSet = $('enter');
+        oSet.onclick = function(){
+            if(onOff){
+                oWrite.innerHTML += '<li class="th">'+'<img src='+arr[0] + "/><p>" + oGet.value + '<span class="sent1"></span>' +"</p></li>";
+            } else{
+                oWrite.innerHTML += '<li class="ds">' + '<img src='+arr[1] + "/><p>" + oGet.value + '<span class="sent2"></span>' + "</p></li>";
+            }
+            oGet.value = '';
+            oGet.focus();
+        }
+    }
+
+    //调用ID通配符
+    function $(id){
+        return document.getElementById(id);
+    }
+</script>
+</body>
+</html>
